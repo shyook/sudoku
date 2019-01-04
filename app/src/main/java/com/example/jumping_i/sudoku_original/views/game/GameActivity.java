@@ -89,13 +89,38 @@ public class GameActivity extends BaseActivity implements IGameContractView {
         });
     }
 
+    /**
+     * 데이터 변경으로 다시 그린다.
+     * @param arrItems
+     */
+    @Override
+    public void changeSudokuDataSet(ArrayList<SudokuData> arrItems) {
+        mAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 성공 여부를 디스플레이 한다.
+     *
+     * @param result
+     */
+    @Override
+    public void doResultDisplay(boolean result) {
+        if (result) {
+            Toast.makeText(this, R.string.sudoku_game_complete, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.sudoku_game_fail, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /*******************************************************************************
+     * Click Event.
+     *******************************************************************************/
     private AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long l_position) {
             Log.i(TAG, "position : " + position + "  , l_position : " + l_position);
             TextView tv = (TextView) view.findViewById(R.id.sudoku_cell_tv);
             mPresenter.setSelectSudokuCell(tv, mAdapter.getItem(position), position);
-
 
             Toast.makeText(getActivity(), position + ", " + tv.getText(), Toast.LENGTH_SHORT).show();
         }
@@ -111,18 +136,4 @@ public class GameActivity extends BaseActivity implements IGameContractView {
             Toast.makeText(getActivity(), position + ", " + button.getTag(), Toast.LENGTH_SHORT).show();
         }
     };
-
-    @Override
-    public void changeSudokuDataSet(ArrayList<SudokuData> arrItems) {
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void doResultDisplay(boolean result) {
-        if (result) {
-            Toast.makeText(this, R.string.sudoku_game_complete, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, R.string.sudoku_game_fail, Toast.LENGTH_SHORT).show();
-        }
-    }
 }

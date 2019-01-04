@@ -13,20 +13,28 @@ import android.widget.TextView;
 import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.data.SudokuData;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameUtils;
-import com.example.jumping_i.sudoku_original.utils.SudokuGenerator;
 
 import java.util.ArrayList;
 
 public class GameGridViewAdapter extends ArrayAdapter<SudokuData> {
+    /*******************************************************************************
+     * Variable.
+     *******************************************************************************/
     private Context mContext;
     private ArrayList<SudokuData> mArrayItems;
 
+    /*******************************************************************************
+     * 생성자.
+     *******************************************************************************/
     public GameGridViewAdapter(@NonNull Context context, ArrayList<SudokuData> items) {
         super(context, R.layout.list_item_sudoku, items);
         mContext = context;
         mArrayItems = items;
     }
 
+    /*******************************************************************************
+     * Override Method.
+     *******************************************************************************/
     @Override
     public int getCount() {
         return mArrayItems.size();
@@ -53,6 +61,7 @@ public class GameGridViewAdapter extends ArrayAdapter<SudokuData> {
             view = convertView;
         }
 
+        // 데이터를 획득한다.
         SudokuData sudokuInfo = getItem(position);
         TextView textView = view.findViewById(R.id.sudoku_cell_tv);
 
@@ -62,17 +71,17 @@ public class GameGridViewAdapter extends ArrayAdapter<SudokuData> {
             } else {
                 textView.setText("");
             }
-        }
 
-        if (sudokuInfo.getSudokuInfo() != 0 && sudokuInfo.isModification()) {
-            textView.setBackgroundColor(Color.parseColor("#FF9900"));
-        } else if (SudokuGameUtils.getInstance().isColorRegion(position)) {
-            textView.setBackgroundColor(Color.parseColor("#FFFF00"));
-        } else {
-            textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            // 색상을 표시 한다.
+            if (sudokuInfo.getSudokuInfo() != 0 && sudokuInfo.isModification()) {
+                textView.setBackgroundColor(Color.parseColor("#FF9900"));
+            } else if (SudokuGameUtils.getInstance().isColorRegion(position)) {
+                textView.setBackgroundColor(Color.parseColor("#FFFF00"));
+            } else {
+                textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }
         }
 
         return view;
     }
-
 }

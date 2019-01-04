@@ -38,6 +38,10 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
     /*******************************************************************************
      * public method.
      *******************************************************************************/
+    /**
+     * 게임 모드 선택 변경에 대한 동작을 수행한다.
+     * @param isUp
+     */
     public void changeMode(boolean isUp) {
         Log.d(TAG, "changeMode()");
         if (isUp) {
@@ -49,9 +53,32 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
         updateGameMode(mGameMode);
     }
 
+    /**
+     * 처음 진입시 게임 모드를 셋팅한다.
+     */
+    public void initGameMode() {
+        Log.d(TAG, "initGameMode()");
+        mView.updateGameModeView(mGameMode.getMode());
+    }
+
+    /**
+     * 선택한 모드로 게임을 시작한다.
+     */
+    public void startGame() {
+        Log.d(TAG, "initGameMode()");
+        Intent i = new Intent(mActivity, GameActivity.class);
+        i.putExtra(IConsts.IntentConsts.BUNDLE_GAME_MODE, mGameMode.getMode());
+        mActivity.startActivity(i);
+    }
+
     /*******************************************************************************
      * Private method.
      *******************************************************************************/
+    /**
+     * 현재 모드에 대한 State Class  반환.
+     * @param gameMode
+     * @return
+     */
     private IGameModeState getCurrentModeState(SudokuGenerator.eGameMode gameMode) {
         switch (gameMode.getMode()) {
             case R.string.sudoku_game_mode_easy:
@@ -68,20 +95,13 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
         }
     }
 
+    /**
+     * 게임 모드를 변경을 View에 알린다.
+     *
+     * @param gameMode
+     */
     private void updateGameMode(SudokuGenerator.eGameMode gameMode) {
         Log.d(TAG, "updateGameMode()");
         mView.updateGameModeView(gameMode.getMode());
-    }
-
-    public void initGameMode() {
-        Log.d(TAG, "initGameMode()");
-        mView.updateGameModeView(mGameMode.getMode());
-    }
-
-    public void startGame() {
-        Log.d(TAG, "initGameMode()");
-        Intent i = new Intent(mActivity, GameActivity.class);
-        i.putExtra(IConsts.IntentConsts.BUNDLE_GAME_MODE, mGameMode.getMode());
-        mActivity.startActivity(i);
     }
 }

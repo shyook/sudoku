@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.base.BasePresenter;
 import com.example.jumping_i.sudoku_original.data.SudokuData;
-import com.example.jumping_i.sudoku_original.utils.SudokuGameChecker;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameController;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameUtils;
 import com.example.jumping_i.sudoku_original.utils.SudokuGenerator;
@@ -44,22 +43,40 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
         }
     }
 
+    /*******************************************************************************
+     * Public Method.
+     *******************************************************************************/
+    /**
+     * Game Mode를 셋팅한다.
+     * @param mode
+     */
     public void setGameMode(int mode) {
         Log.d(TAG, "setGameMode()");
         mGameMode = SudokuGenerator.eGameMode.getIntToGameMode(mode);
         Log.i(TAG, "mGameMode : " + mActivity.getString(mGameMode.getMode()));
     }
 
+    /**
+     * 수도쿠를 생성하고 그린다.
+     */
     public void createSudoku() {
         Log.d(TAG, "createSudoku()");
         SudokuGameController.getInstance().createGameGrid(mActivity);
     }
 
+    /**
+     * 수도쿠 리스트 데이터를 반환한다.
+     * @return
+     */
     public ArrayList<SudokuData> getArraySudoku() {
         Log.d(TAG, "getArraySudoku()");
         return SudokuGameController.getInstance().getArraySudoku();
     }
 
+    /**
+     * 버튼 리스트 데이터를 반환한다.
+     * @return
+     */
     public ArrayList<String> getButtonInfo() {
         Log.d(TAG, "getButtonInfo()");
         ArrayList<String> arrButtonInfo = new ArrayList<>();
@@ -72,6 +89,12 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
         return arrButtonInfo;
     }
 
+    /**
+     * 선택된 셀을 셋팅한다. (선택된셀 색상 변경 / 수정 불가능한 셀의 경우 아무런 변결 없음)
+     * @param tv
+     * @param item
+     * @param position
+     */
     public void setSelectSudokuCell(TextView tv, SudokuData item, int position) {
         Log.d(TAG, "setSelectSudokuCell()");
         if (mSelectedCell != null) {
@@ -96,6 +119,11 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
         }
     }
 
+    /**
+     * 버튼을 클릭한 경우 해당 셀을 변경한다.
+     * @param button
+     * @param position
+     */
     public void onClickButtonEvent(Button button, int position) {
         Log.d(TAG, "onClickButtonEvent()");
 
@@ -115,6 +143,10 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
         }
     }
 
+    /**
+     * 확인 버튼을 누른경우 모든 셀이 채워졌는지 확인 한다.
+     * @return true is not empty.
+     */
     public boolean confirmGame() {
         ArrayList<SudokuData> arrItems = getArraySudoku();
 
@@ -127,8 +159,11 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
         return true;
     }
 
+    /**
+     * 확인 버튼을 누른경우 수도쿠가 정확하게 완성 되었는지 확인 후 디스플레이 한다.
+     */
     public void checkCompleteGame() {
-        if (SudokuGameChecker.getInstance().isCompleteSudoku(SudokuGameUtils.getInstance().getSudokuListToArray(getArraySudoku()))) {
+        if (SudokuGameController.getInstance().isCompleteSudoku(SudokuGameUtils.getInstance().getSudokuListToArray(getArraySudoku()))) {
             mView.doResultDisplay(true);
         }
 

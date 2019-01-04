@@ -5,12 +5,23 @@ import com.example.jumping_i.sudoku_original.data.SudokuData;
 import java.util.List;
 
 public class SudokuGameUtils {
+    /*******************************************************************************
+     * Variable.
+     *******************************************************************************/
     private static SudokuGameUtils mInstance = null;
 
+    /*******************************************************************************
+     * Initialize.
+     *******************************************************************************/
     private SudokuGameUtils() {
 
     }
 
+    /**
+     * Singleton Instance.
+     *
+     * @return
+     */
     public static SudokuGameUtils getInstance() {
         if (mInstance == null) {
             mInstance = new SudokuGameUtils();
@@ -19,6 +30,15 @@ public class SudokuGameUtils {
         return mInstance;
     }
 
+    /*******************************************************************************
+     * Public Method.
+     *******************************************************************************/
+    /**
+     * 칼러 섹션인지 확인 한다.
+     *
+     * @param position
+     * @return true is color.
+     */
     public boolean isColorRegion(int position) {
         if (position == -1) {
             return false;
@@ -37,6 +57,12 @@ public class SudokuGameUtils {
         return false;
     }
 
+    /**
+     * List 형식의 데인터를 2차원 배열로 반환 한다.
+     *
+     * @param arrData
+     * @return
+     */
     public int[][] getSudokuListToArray(List<SudokuData> arrData) {
         int[][] sudoku = new int[SudokuGenerator.SUDOKU_ROW][SudokuGenerator.SUDOKU_COL];
 

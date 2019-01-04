@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.jumping_i.sudoku_original.data.SudokuData;
-import com.example.jumping_i.sudoku_original.views.sudoku_area.SudokuGameGrid;
 
 import java.util.ArrayList;
 
@@ -21,8 +20,6 @@ public class SudokuGameController {
      * Variable.
      *******************************************************************************/
     private static SudokuGameController mInstance;
-    private SudokuGameGrid gameGrid = null;
-    private int mSelectedPositionX = -1, mSelectedPositionY = -1;
     private ArrayList<SudokuData> mArraySudoku = new ArrayList<>();
 
     /*******************************************************************************
@@ -76,37 +73,115 @@ public class SudokuGameController {
     }
 
     /**
-     * sudoku game 판을 반환한다.
+     * sudoku가 완성 되었는지 체크 한다.
+     *
+     * @param sudoku
      * @return
      */
-    public SudokuGameGrid getGameGrid() {
-        Log.d(TAG, "getGameGrid()");
-        return gameGrid;
+    public boolean isCompleteSudoku(int[][] sudoku) {
+        Log.d(TAG, "isCompleteSudoku()");
+
+        return checkRow(sudoku) || checkColumn(sudoku) || checkRegions(sudoku);
     }
 
+    /*******************************************************************************
+     * Private Method.
+     *******************************************************************************/
     /**
-     * 선택된 cell을 저장한다.
-     * @param x
-     * @param y
-     */
-    public void setSelectedPosition(int x, int y) {
-        Log.d(TAG, "setSelectedPosition()");
-        mSelectedPositionX = x;
-        mSelectedPositionY = y;
-    }
-
-    /**
+     * Row 방향에 같은 숫자가 있는지 체크 한다.
      *
-     * @param number
+     * @param sudoku
+     * @return true is success
      */
-    public void setNumber(int number) {
-        Log.d(TAG, "setNumber()");
+    private boolean checkRow(int[][] sudoku) {
+        Log.d(TAG, "checkRow()");
 
-        if (mSelectedPositionX != -1 && mSelectedPositionY != -1) {
-            gameGrid.setItem(mSelectedPositionX, mSelectedPositionY, number);
+        for (int y = 0; y < SudokuGenerator.SUDOKU_COL; y++) {
+            for (int xPos = 0; xPos < SudokuGenerator.SUDOKU_ROW; xPos++) {
+                // 초기값이 있으면 실패
+                if (sudoku[xPos][y] == 0) {
+                    return false;
+                }
+
+                // 해당 cell 이후 같은 숫자가 있는지 체크
+                for (int x = xPos + 1; x < SudokuGenerator.SUDOKU_ROW; x++) {
+                    if (sudoku[xPos][y] == sudoku[x][y] || sudoku[x][y] == 0) {
+                        return false;
+                    }
+                }
+            }
         }
+        return true;
+    }
 
-        // 게임이 완성 됐는지 체크 한다.
-        gameGrid.checkGame();
+    /**
+     * Column 방향에 같은 숫자가 있는지 체크 한다.
+     *
+     * @param sudoku
+     * @return true is success.
+     */
+    private boolean checkColumn(int[][] sudoku) {
+        Log.d(TAG, "checkColumn()");
+
+        for (int x = 0; x < SudokuGenerator.SUDOKU_ROW; x++) {
+            for (int yPos = 0; yPos < SudokuGenerator.SUDOKU_COL; yPos++) {
+                // 초기값이 있으면 실패
+                if (sudoku[x][yPos] == 0) {
+                    return false;
+                }
+
+                // 해당 cell 이후 같은 숫자가 있는지 체크
+                for (int y = yPos + 1; y < SudokuGenerator.SUDOKU_COL; y++) {
+                    if (sudoku[x][yPos] == sudoku[x][y] || sudoku[x][y] == 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 해당 지역에 같은 숫자가 있는지 체크한다.
+     *
+     * @param sudoku
+     * @return true is success.
+     */
+    private boolean checkRegions(int[][] sudoku) {
+        Log.d(TAG, "checkRegions()");
+
+        for (int xRegion = 0; xRegion < 3; xRegion++) {
+            for (int yRegion = 0; yRegion < 3; yRegion++) {
+                if (! checkRegions(sudoku, xRegion, yRegion)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 해당 지역에 같은 숫자가 있는지 체크 한다.
+     *
+     * @param sudoku
+     * @param xRegion
+     * @param yRegion
+     * @return true is success
+     */
+    private boolean checkRegions(int[][] sudoku, int xRegion, int yRegion) {
+        Log.d(TAG, "checkRegions()");
+
+        for (int xPos = xRegion * 3; xPos < xRegion * 3 + 3; xPos++) {
+            for (int yPos = yRegion * 3; yPos < yRegion * 3 + 3; yPos++) {
+                for (int x = xPos; x < xRegion * 3 + 3; x++) {
+                    for (int y = yPos; y < yRegion * 3 + 3; y++) {
+                        if (((x != xPos || y != yPos) && sudoku[xPos][yPos] == sudoku[x][y]) || sudoku[x][y] == 0) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

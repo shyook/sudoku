@@ -8,8 +8,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.jumping_i.sudoku_original.base.BaseActivity;
-import com.example.jumping_i.sudoku_original.base.IBaseView;
-import com.example.jumping_i.sudoku_original.utils.SudokuGameController;
 import com.example.jumping_i.sudoku_original.views.menu.IModeContractView;
 import com.example.jumping_i.sudoku_original.views.menu.ModePresenter;
 

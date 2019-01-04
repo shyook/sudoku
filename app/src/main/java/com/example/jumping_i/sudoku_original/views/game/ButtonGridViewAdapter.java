@@ -16,9 +16,15 @@ import com.example.jumping_i.sudoku_original.R;
 import java.util.ArrayList;
 
 public class ButtonGridViewAdapter extends ArrayAdapter<String> {
+    /*******************************************************************************
+     * Variable.
+     *******************************************************************************/
     private Context mContext;
     private ArrayList<String> mArrayItems;
 
+    /*******************************************************************************
+     * 생성자.
+     *******************************************************************************/
     public ButtonGridViewAdapter(@NonNull Context context, ArrayList<String> items) {
         super(context, R.layout.list_item_button, items);
 
@@ -26,6 +32,9 @@ public class ButtonGridViewAdapter extends ArrayAdapter<String> {
         mArrayItems = items;
     }
 
+    /*******************************************************************************
+     * Override Method.
+     *******************************************************************************/
     @Override
     public int getCount() {
         return mArrayItems.size();
