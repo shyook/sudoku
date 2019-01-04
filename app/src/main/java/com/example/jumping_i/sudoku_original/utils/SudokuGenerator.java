@@ -136,14 +136,15 @@ public class SudokuGenerator {
      * 레벨에 따라 빈칸을 만들기 위해 해당 항목의 숫자를 0으로 변경 한다.
      *
      * @param sudoku
+     * @param mGameMode
      * @return
      */
-    public int[][] removeElements(int[][] sudoku) {
+    public int[][] removeElements(int[][] sudoku, eGameMode mGameMode) {
         Log.d(TAG, "removeElements()");
 
         int i = 0;
 
-        while (i < eGameMode.SUDOKU_LEVEL_EASY.getBlankNumber()) {
+        while (i < mGameMode.getBlankNumber()) {
             int x = mRandom.nextInt(SUDOKU_ROW);
             int y = mRandom.nextInt(SUDOKU_COL);
 

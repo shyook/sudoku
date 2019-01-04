@@ -62,6 +62,7 @@ public class GameActivity extends BaseActivity implements IGameContractView {
             setTitle(getString(R.string.title_game_mode, getString(mode)));
         }
 
+        mPresenter.clearSudoku();
         mPresenter.createSudoku();
 
         // Game Cell Area

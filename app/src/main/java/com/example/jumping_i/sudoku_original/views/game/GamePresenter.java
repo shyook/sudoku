@@ -61,7 +61,7 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
      */
     public void createSudoku() {
         Log.d(TAG, "createSudoku()");
-        SudokuGameController.getInstance().createGameGrid(mActivity);
+        SudokuGameController.getInstance().createGameGrid(mActivity, mGameMode);
     }
 
     /**
@@ -168,5 +168,9 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
         }
 
         mView.doResultDisplay(false);
+    }
+
+    public void clearSudoku() {
+        SudokuGameController.getInstance().clearGridView();
     }
 }

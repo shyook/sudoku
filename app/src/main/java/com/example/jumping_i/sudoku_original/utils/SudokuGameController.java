@@ -50,11 +50,12 @@ public class SudokuGameController {
     /**
      * sudoku game을 위한 판을 생성한다.
      * @param context
+     * @param mGameMode
      */
-    public void createGameGrid(Context context) {
+    public void createGameGrid(Context context, SudokuGenerator.eGameMode mGameMode) {
         Log.d(TAG, "createGameGrid()");
         int[][] sudoku = SudokuGenerator.getInstance().generateGrid();
-        sudoku = SudokuGenerator.getInstance().removeElements(sudoku);
+        sudoku = SudokuGenerator.getInstance().removeElements(sudoku,mGameMode);
 
         for (int i = 0; i < SUDOKU_ROW; i++) {
             for (int j = 0; j < SUDOKU_COL; j++) {
@@ -183,5 +184,9 @@ public class SudokuGameController {
             }
         }
         return true;
+    }
+
+    public void clearGridView() {
+        mArraySudoku.clear();
     }
 }
