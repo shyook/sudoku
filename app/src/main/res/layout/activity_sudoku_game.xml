@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,17 +9,34 @@
         android:id="@+id/game_cell_gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="1dp"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
+        android:columnWidth="1dp"
+        android:background="#ececec"
         android:numColumns="9"
-        android:background="#ececec" >
-
+        android:gravity="center" >
     </GridView>
 
     <GridView
         android:id="@+id/game_button_cell_gv"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/game_cell_gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="5" >
-
     </GridView>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/game_confirm_bt"
+            android:layout_width="match_parent"
+            android:text="@string/button_confirm"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
+</LinearLayout>

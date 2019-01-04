@@ -30,12 +30,10 @@ public class MainActivity extends BaseActivity implements IModeContractView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_select_mode);
         setTitle(R.string.title_game_mode_select);
 
         init();
-
-        SudokuGameController.getInstance().createGameGrid(this);
     }
 
     @Override
@@ -57,14 +55,14 @@ public class MainActivity extends BaseActivity implements IModeContractView {
         mPresenter = new ModePresenter();
         mPresenter.attachView(this);
 
-//        mUpButton = (ImageButton) findViewById(R.id.arrow_up_iv);
-//        mDownButton = (ImageButton) findViewById(R.id.arrow_down_iv);
-//        mModeDisplay = (TextView) findViewById(R.id.game_mode_tv);
-//        mStartButton = (Button) findViewById(R.id.game_start_bt);
-//
-//        mUpButton.setOnClickListener(mClickListener);
-//        mDownButton.setOnClickListener(mClickListener);
-//        mStartButton.setOnClickListener(mClickListener);
+        mUpButton = findViewById(R.id.arrow_up_iv);
+        mDownButton = findViewById(R.id.arrow_down_iv);
+        mModeDisplay = findViewById(R.id.game_mode_tv);
+        mStartButton = findViewById(R.id.game_start_bt);
+
+        mUpButton.setOnClickListener(mClickListener);
+        mDownButton.setOnClickListener(mClickListener);
+        mStartButton.setOnClickListener(mClickListener);
 
         mPresenter.initGameMode();
     }

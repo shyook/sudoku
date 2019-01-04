@@ -19,6 +19,7 @@ public class SudokuGenerator {
 
     public static final int SUDOKU_ROW = 9;
     public static final int SUDOKU_COL = 9;
+    public static final int SUDOKU_REGION_NUMBER = 3;
     public static final int SUDOKU_TOTAL_NUMBER = SUDOKU_COL * SUDOKU_ROW;
     public enum eGameMode {
         SUDOKU_LEVEL_EASY (R.string.sudoku_game_mode_easy, 30)

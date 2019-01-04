@@ -2,6 +2,8 @@
     <string name="app_name">sudoku_original</string>
     <string name="button_del">DEL</string>
     <string name="sudoku_game_complete">게임 성공!!</string>
+    <string name="sudoku_game_file_because_empty_cell">아직 채우지 않은 공간이 있습니다.</string>
+    <string name="sudoku_game_fail">잘못 입력된 값이 존재합니다.</string>
     <string name="sudoku_game_start">게임 시작</string>
 
     <string name="sudoku_game_mode_easy">쉬움</string>
@@ -10,4 +12,6 @@
 
     <string name="title_game_mode_select">게임 난이도 선택</string>
     <string name="title_game_mode">난이도 : %s</string>
+
+    <string name="button_confirm">확인</string>
 </resources>

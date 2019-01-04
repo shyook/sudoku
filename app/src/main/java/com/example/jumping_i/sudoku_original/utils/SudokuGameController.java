@@ -3,7 +3,13 @@ package com.example.jumping_i.sudoku_original.utils;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.jumping_i.sudoku_original.data.SudokuData;
 import com.example.jumping_i.sudoku_original.views.sudoku_area.SudokuGameGrid;
+
+import java.util.ArrayList;
+
+import static com.example.jumping_i.sudoku_original.utils.SudokuGenerator.SUDOKU_COL;
+import static com.example.jumping_i.sudoku_original.utils.SudokuGenerator.SUDOKU_ROW;
 
 public class SudokuGameController {
     /*******************************************************************************
@@ -17,6 +23,7 @@ public class SudokuGameController {
     private static SudokuGameController mInstance;
     private SudokuGameGrid gameGrid = null;
     private int mSelectedPositionX = -1, mSelectedPositionY = -1;
+    private ArrayList<SudokuData> mArraySudoku = new ArrayList<>();
 
     /*******************************************************************************
      * Initialize.
@@ -51,8 +58,21 @@ public class SudokuGameController {
         Log.d(TAG, "createGameGrid()");
         int[][] sudoku = SudokuGenerator.getInstance().generateGrid();
         sudoku = SudokuGenerator.getInstance().removeElements(sudoku);
-        gameGrid = new SudokuGameGrid(context);
-        gameGrid.setGameGrid(sudoku);
+
+        for (int i = 0; i < SUDOKU_ROW; i++) {
+            for (int j = 0; j < SUDOKU_COL; j++) {
+                int nNumber = sudoku[i][j];
+                if (nNumber != 0) {
+                    mArraySudoku.add(new SudokuData(sudoku[i][j], false));
+                } else {
+                    mArraySudoku.add(new SudokuData(sudoku[i][j], true));
+                }
+            }
+        }
+    }
+
+    public ArrayList<SudokuData> getArraySudoku() {
+        return mArraySudoku;
     }
 
     /**

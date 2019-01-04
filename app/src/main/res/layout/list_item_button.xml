@@ -7,20 +7,18 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/sudoku_cell_ll"
-        android:background="#FFFFFF"
+        android:id="@+id/button_cell_ll"
+        android:background="#ececec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/sudoku_cell_tv"
+        <Button
+            android:id="@+id/button_cell_bt"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:gravity="center"
             android:textColor="#000000"
-            android:text=""
-            android:textSize="13sp"
             tools:ignore="Suspicious0dp" />
     </LinearLayout>
 </LinearLayout>
