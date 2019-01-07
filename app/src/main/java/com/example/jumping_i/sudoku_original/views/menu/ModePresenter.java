@@ -2,7 +2,9 @@ package com.example.jumping_i.sudoku_original.views.menu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.base.BasePresenter;
@@ -18,6 +20,8 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
     private IModeContractView mView = null;
     private Activity mActivity = null;
     private SudokuGenerator.eGameMode mGameMode = SudokuGenerator.eGameMode.SUDOKU_LEVEL_EASY;
+    /** BackKey press Count. */
+    private int mBackButtonClickCount = 0;
 
     /*******************************************************************************
      * Interface Override.
@@ -71,6 +75,27 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
         mActivity.startActivity(i);
     }
 
+    /**
+     * 뒤로 버튼을 두번 클릭했을때 앱 종료 하도록 체크.
+     * @return
+     */
+    public boolean checkExitApp() {
+        Log.d(TAG, "checkExitApp()");
+        mBackButtonClickCount++;
+        if (mBackButtonClickCount == 1) {
+            Toast.makeText(mActivity, R.string.toast_finish_app, Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    mBackButtonClickCount = 0;
+                }
+            }, 3000);
+            return false;
+        }
+        return true;
+    }
+
     /*******************************************************************************
      * Private method.
      *******************************************************************************/
@@ -104,4 +129,5 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
         Log.d(TAG, "updateGameMode()");
         mView.updateGameModeView(gameMode.getMode());
     }
+
 }

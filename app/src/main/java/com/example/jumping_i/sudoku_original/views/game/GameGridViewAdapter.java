@@ -17,6 +17,7 @@ import com.example.jumping_i.sudoku_original.utils.SudokuGameUtils;
 import java.util.ArrayList;
 
 public class GameGridViewAdapter extends ArrayAdapter<SudokuData> {
+    private static final String TAG = GameGridViewAdapter.class.getSimpleName();
     /*******************************************************************************
      * Variable.
      *******************************************************************************/

@@ -14,4 +14,8 @@
     <string name="title_game_mode">난이도 : %s</string>
 
     <string name="button_confirm">확인</string>
+
+    <string name="toast_finish_app">\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.</string>
+    <string name="button_redo">Redo</string>
+    <string name="button_undo">Undo</string>
 </resources>

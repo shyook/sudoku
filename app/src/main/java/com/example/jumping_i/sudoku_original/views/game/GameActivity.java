@@ -24,7 +24,8 @@ public class GameActivity extends BaseActivity implements IGameContractView {
      *******************************************************************************/
     private GamePresenter mPresenter;
     private GridView mGridView;
-    private GameGridViewAdapter mAdapter;
+    private GameGridViewAdapter mAdapter;           // Game Adapter
+    private ButtonGridViewAdapter mButtonAdapter;   // 버튼 Adapter
 
     /*******************************************************************************
      * Life Cycle.
@@ -73,7 +74,8 @@ public class GameActivity extends BaseActivity implements IGameContractView {
 
         // Number Button Area
         GridView buttonGridView = findViewById(R.id.game_button_cell_gv);
-        buttonGridView.setAdapter(new ButtonGridViewAdapter(this, mPresenter.getButtonInfo()));
+        mButtonAdapter = new ButtonGridViewAdapter(this, mPresenter.getButtonInfo());
+        buttonGridView.setAdapter(mButtonAdapter);
         buttonGridView.setOnItemClickListener(mButtonItemClickListener);
 
         // Confirm Button Area
@@ -99,6 +101,11 @@ public class GameActivity extends BaseActivity implements IGameContractView {
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void changeButtonDataSet() {
+        mButtonAdapter.notifyDataSetChanged();
+    }
+
     /**
      * 성공 여부를 디스플레이 한다.
      *
@@ -120,7 +127,7 @@ public class GameActivity extends BaseActivity implements IGameContractView {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long l_position) {
             Log.i(TAG, "position : " + position + "  , l_position : " + l_position);
-            TextView tv = (TextView) view.findViewById(R.id.sudoku_cell_tv);
+            TextView tv = view.findViewById(R.id.sudoku_cell_tv);
             mPresenter.setSelectSudokuCell(tv, mAdapter.getItem(position), position);
 
             Toast.makeText(getActivity(), position + ", " + tv.getText(), Toast.LENGTH_SHORT).show();

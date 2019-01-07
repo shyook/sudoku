@@ -186,6 +186,9 @@ public class SudokuGameController {
         return true;
     }
 
+    /**
+     * 배열을 초기화 한다.
+     */
     public void clearGridView() {
         mArraySudoku.clear();
     }

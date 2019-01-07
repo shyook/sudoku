@@ -24,7 +24,7 @@
         android:layout_below="@id/game_cell_gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="5" >
+        android:numColumns="4" >
     </GridView>
 
     <LinearLayout

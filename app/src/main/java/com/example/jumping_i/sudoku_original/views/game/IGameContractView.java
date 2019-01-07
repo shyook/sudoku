@@ -11,4 +11,7 @@ public interface IGameContractView extends IBaseView {
 
     // 확인 버튼 클릭시 성공 여부를 디스플레이 한다.
     void doResultDisplay(boolean result);
+
+    // Undo / Redo 가능 여부를 변경 한다.
+    void changeButtonDataSet();
 }

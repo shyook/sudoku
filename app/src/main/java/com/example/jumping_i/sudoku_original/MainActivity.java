@@ -43,6 +43,13 @@ public class MainActivity extends BaseActivity implements IModeContractView {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mPresenter.checkExitApp()) {
+            super.onBackPressed();
+        }
+    }
+
     /*******************************************************************************
      * View Implement.
      *******************************************************************************/

@@ -9,14 +9,23 @@ import android.widget.TextView;
 
 import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.base.BasePresenter;
+import com.example.jumping_i.sudoku_original.data.ButtonData;
 import com.example.jumping_i.sudoku_original.data.SudokuData;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameController;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameUtils;
 import com.example.jumping_i.sudoku_original.utils.SudokuGenerator;
+import com.example.jumping_i.sudoku_original.views.history.BaseRequestSet;
+import com.example.jumping_i.sudoku_original.views.history.ISuccessResponse;
+import com.example.jumping_i.sudoku_original.views.history.InvokeManager;
+import com.example.jumping_i.sudoku_original.views.history.RequestDeleteSet;
+import com.example.jumping_i.sudoku_original.views.history.RequestNumberSet;
+import com.example.jumping_i.sudoku_original.views.history.RequestRedoSet;
+import com.example.jumping_i.sudoku_original.views.history.RequestUndoSet;
+import com.example.jumping_i.sudoku_original.views.history.ResultSet;
 
 import java.util.ArrayList;
 
-public class GamePresenter extends BasePresenter<IGameContractView> {
+public class GamePresenter extends BasePresenter<IGameContractView> implements ISuccessResponse {
     private static final String TAG = GamePresenter.class.getSimpleName();
     /*******************************************************************************
      * Variable.
@@ -41,6 +50,20 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
         if (mView != null) {
             mView = null;
         }
+    }
+
+
+    @Override
+    public void onSuccess(Object result) {
+        ResultSet set = (ResultSet) result;
+        // 수도쿠 영역
+        mView.changeSudokuDataSet(set.getArraySudokuData());
+
+        // 버튼 영역
+        ButtonData undoRedoInfo = new ButtonData();
+        undoRedoInfo.setUndoAvailable(isUndoAvailable());
+        undoRedoInfo.setRedoAvailable(isRedoAvailable());
+        mView.changeButtonDataSet();
     }
 
     /*******************************************************************************
@@ -77,14 +100,29 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
      * 버튼 리스트 데이터를 반환한다.
      * @return
      */
-    public ArrayList<String> getButtonInfo() {
+    public ArrayList<ButtonData> getButtonInfo() {
         Log.d(TAG, "getButtonInfo()");
-        ArrayList<String> arrButtonInfo = new ArrayList<>();
+        ArrayList<ButtonData> arrButtonInfo = new ArrayList<>();
         for (int i = 1; i <= 9; i++) {
-            arrButtonInfo.add(String.valueOf(i));
+            // arrButtonInfo.add(new ButtonData().setButtonName(String.valueOf(i)));
+            ButtonData buttonInfo = new ButtonData();
+            buttonInfo.setButtonName(String.valueOf(i));
+            arrButtonInfo.add(buttonInfo);
         }
 
-        arrButtonInfo.add(mActivity.getString(R.string.button_del));
+        ButtonData delButton = new ButtonData();
+        delButton.setButtonName(mActivity.getString(R.string.button_del));
+        arrButtonInfo.add(delButton);
+
+        ButtonData undoButton = new ButtonData();
+        undoButton.setButtonName(mActivity.getString(R.string.button_undo));
+        undoButton.setUndoAvailable(false);
+        arrButtonInfo.add(undoButton);
+
+        ButtonData redoButton = new ButtonData();
+        redoButton.setButtonName(mActivity.getString(R.string.button_redo));
+        redoButton.setRedoAvailable(false);
+        arrButtonInfo.add(redoButton);
 
         return arrButtonInfo;
     }
@@ -120,7 +158,7 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
     }
 
     /**
-     * 버튼을 클릭한 경우 해당 셀을 변경한다.
+     * 버튼을 클릭한 경우 해당 셀을 변경한다 (Command Pattern 이용).
      * @param button
      * @param position
      */
@@ -128,20 +166,53 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
         Log.d(TAG, "onClickButtonEvent()");
 
         if (mSelectedPosition != -1) {
-            ArrayList<SudokuData> arrItems = getArraySudoku();
+            String buttonTag = (String) button.getTag();
+            BaseRequestSet req = null;
 
-            if (mActivity.getString(R.string.button_del).equals(button.getTag())) {
+            if (mActivity.getString(R.string.button_del).equals(buttonTag)) {
                 // 삭제 버튼
-                arrItems.remove(mSelectedPosition);
-                arrItems.add(mSelectedPosition, new SudokuData(0, true));
-            } else {
-                arrItems.remove(mSelectedPosition);
-                arrItems.add(mSelectedPosition, new SudokuData(Integer.parseInt((String) button.getTag()), true));
+                req = new RequestDeleteSet(getArraySudoku(), mSelectedPosition);
+            } else if(mActivity.getString(R.string.button_undo).equals(buttonTag)) {
+                // Undo
+                InvokeManager.getInstance().startUndo();
+            } else if (mActivity.getString(R.string.button_redo).equals(buttonTag)) {
+                // Redo
+                InvokeManager.getInstance().startRedo();
+            }  else  {
+                req = new RequestNumberSet(buttonTag, getArraySudoku(), mSelectedPosition);
             }
 
-            mView.changeSudokuDataSet(arrItems);
+            if (req != null) {
+                req.setSuccessResponse(this);
+                InvokeManager.getInstance().startCommand(req);
+            }
         }
     }
+
+    /**
+     * 버튼을 클릭한 경우 해당 셀을 변경한다.
+     * @param button
+     * @param position
+     */
+//    public void onClickButtonEvent(Button button, int position) {
+//        Log.d(TAG, "onClickButtonEvent()");
+//
+//        if (mSelectedPosition != -1) {
+//            String buttonTag = (String) button.getTag();
+//            ArrayList<SudokuData> arrItems = getArraySudoku();
+//
+//            if (mActivity.getString(R.string.button_del).equals(buttonTag)) {
+//                // 삭제 버튼
+//                arrItems.remove(mSelectedPosition);
+//                arrItems.add(mSelectedPosition, new SudokuData(0, true));
+//            } else {
+//                arrItems.remove(mSelectedPosition);
+//                arrItems.add(mSelectedPosition, new SudokuData(Integer.parseInt(buttonTag), true));
+//            }
+//
+//            mView.changeSudokuDataSet(arrItems);
+//        }
+//    }
 
     /**
      * 확인 버튼을 누른경우 모든 셀이 채워졌는지 확인 한다.
@@ -173,4 +244,13 @@ public class GamePresenter extends BasePresenter<IGameContractView> {
     public void clearSudoku() {
         SudokuGameController.getInstance().clearGridView();
     }
+
+    public boolean isUndoAvailable() {
+        return InvokeManager.getInstance().isUndoAvailable();
+    }
+
+    public boolean isRedoAvailable() {
+        return InvokeManager.getInstance().isRedoAvailable();
+    }
+
 }
