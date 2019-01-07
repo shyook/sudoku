@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.base.BasePresenter;
+import com.example.jumping_i.sudoku_original.base.Config;
 import com.example.jumping_i.sudoku_original.data.ButtonData;
 import com.example.jumping_i.sudoku_original.data.SudokuData;
+import com.example.jumping_i.sudoku_original.utils.SharedPrefManager;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameController;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameUtils;
 import com.example.jumping_i.sudoku_original.utils.SudokuGenerator;
@@ -19,11 +21,10 @@ import com.example.jumping_i.sudoku_original.views.history.ISuccessResponse;
 import com.example.jumping_i.sudoku_original.views.history.InvokeManager;
 import com.example.jumping_i.sudoku_original.views.history.RequestDeleteSet;
 import com.example.jumping_i.sudoku_original.views.history.RequestNumberSet;
-import com.example.jumping_i.sudoku_original.views.history.RequestRedoSet;
-import com.example.jumping_i.sudoku_original.views.history.RequestUndoSet;
 import com.example.jumping_i.sudoku_original.views.history.ResultSet;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GamePresenter extends BasePresenter<IGameContractView> implements ISuccessResponse {
     private static final String TAG = GamePresenter.class.getSimpleName();
@@ -241,16 +242,60 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
         mView.doResultDisplay(false);
     }
 
+    /**
+     * 수도쿠를 초기화 한다.
+     */
     public void clearSudoku() {
         SudokuGameController.getInstance().clearGridView();
     }
 
+    /**
+     * Undo 기능이 가능한지 체크.
+     * @return true is available
+     */
     public boolean isUndoAvailable() {
         return InvokeManager.getInstance().isUndoAvailable();
     }
 
+    /**
+     * Redo 기능이 가능한지 체크.
+     * @return true is available
+     */
     public boolean isRedoAvailable() {
         return InvokeManager.getInstance().isRedoAvailable();
     }
 
+    /**
+     * 현재 게임 상태를 SharedPreference에 저장 한다.
+     *
+     * 현재 해당 영역을 사용하지는 않고 SharedPreference 테스트용으로 사용중.
+     */
+    public void setGameState() {
+        SharedPrefManager.getInstance(mActivity).setSharedValueByString(SharedPrefManager.PREF_KEYS.SUDOKU_GAME_STATE_DATA, mActivity.getString(R.string.sudoku_state_start_game));
+
+        if (Config.IS_DEBUG) {
+            ArrayList<String> stringList = new ArrayList<>();
+            stringList.add("A");
+            stringList.add("B");
+            stringList.add("C");
+
+            List<Integer> intList = new ArrayList<>();
+            intList.add(1);
+            intList.add(2);
+            intList.add(3);
+
+            List<Boolean> boolList = new ArrayList<>();
+            boolList.add(true);
+            boolList.add(false);
+
+            SharedPrefManager.getInstance(mActivity).setJsonArrayList(SharedPrefManager.PREF_KEYS.TEST_SHARED_KEY_STRING, stringList);
+            Log.i(TAG, "String Json Array" + SharedPrefManager.getInstance(mActivity).getJsonArrayList(SharedPrefManager.PREF_KEYS.TEST_SHARED_KEY_STRING, new ArrayList<String>()));
+
+            SharedPrefManager.getInstance(mActivity).setJsonArrayList(SharedPrefManager.PREF_KEYS.TEST_SHARED_KEY_INT, intList);
+            Log.i(TAG, "Int Json Array" + SharedPrefManager.getInstance(mActivity).getJsonArrayList(SharedPrefManager.PREF_KEYS.TEST_SHARED_KEY_INT, new ArrayList<Integer>()));
+
+            SharedPrefManager.getInstance(mActivity).setJsonArrayList(SharedPrefManager.PREF_KEYS.TEST_SHARED_KEY_BOOLEAN, boolList);
+            Log.i(TAG, "Boolean Json Array" + SharedPrefManager.getInstance(mActivity).getJsonArrayList(SharedPrefManager.PREF_KEYS.TEST_SHARED_KEY_BOOLEAN, new ArrayList<Boolean>()));
+        }
+    }
 }

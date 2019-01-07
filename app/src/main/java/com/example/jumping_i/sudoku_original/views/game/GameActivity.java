@@ -90,6 +90,8 @@ public class GameActivity extends BaseActivity implements IGameContractView {
                 }
             }
         });
+
+        mPresenter.setGameState();
     }
 
     /**

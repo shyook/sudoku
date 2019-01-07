@@ -18,4 +18,7 @@
     <string name="toast_finish_app">\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.</string>
     <string name="button_redo">Redo</string>
     <string name="button_undo">Undo</string>
+
+    <string name="sudoku_state_start_game">start</string>
+    <string name="sudoku_state_stop_game">stop</string>
 </resources>
