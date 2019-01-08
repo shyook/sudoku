@@ -42,4 +42,17 @@
         android:textSize="15sp"
         android:text="@string/sudoku_game_start"/>
 
+    <Button
+        android:id="@+id/server_api_test_bt"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/game_start_bt"
+        android:visibility="gone"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:text="Retorfit Test" />
+
 </RelativeLayout>

@@ -9,6 +9,9 @@ import android.widget.Toast;
 import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.base.BasePresenter;
 import com.example.jumping_i.sudoku_original.consts.IConsts;
+import com.example.jumping_i.sudoku_original.retrofit.IResultListener;
+import com.example.jumping_i.sudoku_original.retrofit.data.ResponseDataObj;
+import com.example.jumping_i.sudoku_original.retrofit.serverInterface.ServerInterface;
 import com.example.jumping_i.sudoku_original.utils.SudokuGenerator;
 import com.example.jumping_i.sudoku_original.views.game.GameActivity;
 
@@ -94,6 +97,32 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
             return false;
         }
         return true;
+    }
+
+    public void retrofitTest() {
+        ServerInterface.getInstance(mActivity).requestWeatherHourly(2, "36.1234", "127.1234", new IResultListener<ResponseDataObj.HourlyData>() {
+            @Override
+            public void onSuccess(int code, ResponseDataObj.HourlyData result) {
+                if (result != null) {
+                    Log.i(TAG, "result message : " + result.getResult().getMessage());
+
+                    if (result.getWeather() != null && result.getWeather().getHourly() != null && result.getWeather().getHourly().size() > 0) {
+                        for (int i = 0; i < result.getWeather().getHourly().size(); i++) {
+                            Log.i(TAG, "Precipitation SinceOntime : " + result.getWeather().getHourly().get(i).getPrecipitation().getSinceOntime());
+                            Log.i(TAG, "Sky Name : " + result.getWeather().getHourly().get(i).getSky().getName());
+                            Log.i(TAG, "Temperature tc : " + result.getWeather().getHourly().get(i).getTemperature().getTc());
+                            Log.i(TAG, "Wind Wdir : " + result.getWeather().getHourly().get(i).getWind().getWdir());
+                            Log.i(TAG, "Grid City : " + result.getWeather().getHourly().get(i).getGrid().getCity());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 
     /*******************************************************************************
