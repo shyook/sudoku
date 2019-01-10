@@ -9,11 +9,15 @@ import android.widget.Toast;
 import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.base.BasePresenter;
 import com.example.jumping_i.sudoku_original.consts.IConsts;
+import com.example.jumping_i.sudoku_original.db.dao.WeatherDao;
+import com.example.jumping_i.sudoku_original.db.data.Weather;
 import com.example.jumping_i.sudoku_original.retrofit.IResultListener;
 import com.example.jumping_i.sudoku_original.retrofit.data.ResponseDataObj;
 import com.example.jumping_i.sudoku_original.retrofit.serverInterface.ServerInterface;
 import com.example.jumping_i.sudoku_original.utils.SudokuGenerator;
 import com.example.jumping_i.sudoku_original.views.game.GameActivity;
+
+import java.util.List;
 
 public class ModePresenter extends BasePresenter<IModeContractView> {
     private static final String TAG = ModePresenter.class.getSimpleName();
@@ -99,12 +103,17 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
         return true;
     }
 
+    /**
+     * retrofit 라이브러리를 통해 Weather 데이터를 읽어 오고<br>
+     * OrmLite 라이브러를 통해 db에 저장 하는 테스트를 위한 Method.
+     */
     public void retrofitTest() {
         ServerInterface.getInstance(mActivity).requestWeatherHourly(2, "36.1234", "127.1234", new IResultListener<ResponseDataObj.HourlyData>() {
             @Override
             public void onSuccess(int code, ResponseDataObj.HourlyData result) {
                 if (result != null) {
                     Log.i(TAG, "result message : " + result.getResult().getMessage());
+                    Weather weather = new Weather();
 
                     if (result.getWeather() != null && result.getWeather().getHourly() != null && result.getWeather().getHourly().size() > 0) {
                         for (int i = 0; i < result.getWeather().getHourly().size(); i++) {
@@ -113,7 +122,37 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
                             Log.i(TAG, "Temperature tc : " + result.getWeather().getHourly().get(i).getTemperature().getTc());
                             Log.i(TAG, "Wind Wdir : " + result.getWeather().getHourly().get(i).getWind().getWdir());
                             Log.i(TAG, "Grid City : " + result.getWeather().getHourly().get(i).getGrid().getCity());
+
+                            weather.setCity(result.getWeather().getHourly().get(i).getGrid().getCity());
+                            weather.setCounty(result.getWeather().getHourly().get(i).getGrid().getCounty());
+                            weather.setLatitude(result.getWeather().getHourly().get(i).getGrid().getLatitude());
+                            weather.setLongitude(result.getWeather().getHourly().get(i).getGrid().getLongitude());
+                            weather.setVillage(result.getWeather().getHourly().get(i).getGrid().getVillage());
                         }
+                    }
+
+                    WeatherDao.getInstance(mActivity).createOrUpdateWeather(weather);
+
+                    List<Weather> weathers =  WeatherDao.getInstance(mActivity).getWeather();
+                    for (Weather data : weathers) {
+                        Log.i(TAG, "getIdx : " + data.getIdx());
+                        Log.i(TAG, "getCity : " + data.getCity());
+                        Log.i(TAG, "getCounty : " + data.getCounty());
+                        Log.i(TAG, "getLatitude : " + data.getLatitude());
+                        Log.i(TAG, "getLongitude : " + data.getLongitude());
+                        Log.i(TAG, "getVillage : " + data.getVillage());
+                    }
+
+                    weathers.get(0).setCity("인천");
+                    WeatherDao.getInstance(mActivity).createOrUpdateWeather(weathers.get(0));
+
+                    for (Weather data : weathers) {
+                        Log.i(TAG, "getIdx : " + data.getIdx());
+                        Log.i(TAG, "getCity : " + data.getCity());
+                        Log.i(TAG, "getCounty : " + data.getCounty());
+                        Log.i(TAG, "getLatitude : " + data.getLatitude());
+                        Log.i(TAG, "getLongitude : " + data.getLongitude());
+                        Log.i(TAG, "getVillage : " + data.getVillage());
                     }
                 }
             }

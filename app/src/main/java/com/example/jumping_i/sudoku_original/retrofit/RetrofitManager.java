@@ -21,9 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitManager implements IBaseRetrofit {
     private static final String TAG = RetrofitManager.class.getSimpleName();
 
-    private static RetrofitManager mInstance;
     private static Context mContext;
-
     private IRequestApi mRequestApi;
 
     private static class SingletonHolder {
