@@ -1,4 +1,4 @@
-package com.example.jumping_i.sudoku_original.retrofit;
+package com.example.jumping_i.sudoku_original.retrofit.retrofit;
 
 import com.example.jumping_i.sudoku_original.retrofit.data.ResponseDataObj;
 

@@ -1,10 +1,12 @@
-package com.example.jumping_i.sudoku_original.retrofit;
+package com.example.jumping_i.sudoku_original.retrofit.retrofit;
 
 import android.content.Context;
 import android.util.Log;
 
+import com.example.jumping_i.sudoku_original.retrofit.IResultListener;
 import com.example.jumping_i.sudoku_original.retrofit.data.ResponseDataObj;
 import com.example.jumping_i.sudoku_original.retrofit.serverInterface.IParams;
+import com.example.jumping_i.sudoku_original.retrofit.serverInterface.RequestApiType;
 import com.example.jumping_i.sudoku_original.retrofit.serverInterface.ServerInterface;
 
 import org.json.JSONException;
@@ -21,9 +23,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitManager implements IBaseRetrofit {
     private static final String TAG = RetrofitManager.class.getSimpleName();
 
+    /*******************************************************************************
+     * Variable.
+     *******************************************************************************/
     private static Context mContext;
     private IRequestApi mRequestApi;
 
+    /*******************************************************************************
+     * Init.
+     *******************************************************************************/
     private static class SingletonHolder {
         private static RetrofitManager Instance = new RetrofitManager(mContext);
     }
@@ -44,6 +52,15 @@ public class RetrofitManager implements IBaseRetrofit {
         mRequestApi = retrofit.create(IRequestApi.class);
     }
 
+    /*******************************************************************************
+     * Override Method.
+     *******************************************************************************/
+    /**
+     * API 타입에 따른 요청.
+     * @param type
+     * @param param
+     * @param responseCallback
+     */
     @Override
     public void request(RequestApiType type, JSONObject param, final IResultListener responseCallback) {
         Log.d(TAG, "request : " + type.name());

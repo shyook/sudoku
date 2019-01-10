@@ -6,7 +6,9 @@ package com.example.jumping_i.sudoku_original.retrofit;
  * @param <T>
  */
 public interface IResultListener<T> {
-    public void onSuccess(int code, T result);
+    /** 성공시 응답 */
+    void onSuccess(int code, T result);
 
-    public void onFailure(Throwable t);
+    /** 실패시 응답 */
+    void onFailure(Throwable t);
 }

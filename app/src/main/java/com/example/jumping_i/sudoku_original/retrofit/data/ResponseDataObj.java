@@ -7,6 +7,9 @@ import java.util.List;
 
 public class ResponseDataObj {
 
+    /**
+     * 공통 데이터
+     */
     public class Common {
         String alertYn;
         String stormYn;
@@ -20,6 +23,9 @@ public class ResponseDataObj {
         }
     }
 
+    /**
+     * 서버 연동 결과 데이터
+     */
     public class Result {
         @SerializedName("message")
         String message;
@@ -35,6 +41,9 @@ public class ResponseDataObj {
         }
     }
 
+    /**
+     * https://api2.sktelecom.com/weather/current/hourly 결과 데이터.
+     */
     public class HourlyData {
         @SerializedName("common")
         Common common;
@@ -55,6 +64,9 @@ public class ResponseDataObj {
             return common;
         }
 
+        /**
+         * 날씨 정보 데이터.
+         */
         public class Weather {
             @SerializedName("hourly")
             public List<Weather.Hourly> hourly = new ArrayList<>();
@@ -63,6 +75,9 @@ public class ResponseDataObj {
                 return hourly;
             }
 
+            /**
+             * 시간별 날씨 데이터.
+             */
             public class Hourly {
                 @SerializedName("grid")
                 Grid grid;

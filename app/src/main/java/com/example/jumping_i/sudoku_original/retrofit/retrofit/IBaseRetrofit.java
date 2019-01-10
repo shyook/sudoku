@@ -1,4 +1,7 @@
-package com.example.jumping_i.sudoku_original.retrofit;
+package com.example.jumping_i.sudoku_original.retrofit.retrofit;
+
+import com.example.jumping_i.sudoku_original.retrofit.IResultListener;
+import com.example.jumping_i.sudoku_original.retrofit.serverInterface.RequestApiType;
 
 import org.json.JSONObject;
 

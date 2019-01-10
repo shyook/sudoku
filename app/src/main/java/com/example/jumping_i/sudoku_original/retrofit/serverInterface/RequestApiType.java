@@ -1,4 +1,4 @@
-package com.example.jumping_i.sudoku_original.retrofit;
+package com.example.jumping_i.sudoku_original.retrofit.serverInterface;
 
 /**
  * API 타입을 enum 정의.

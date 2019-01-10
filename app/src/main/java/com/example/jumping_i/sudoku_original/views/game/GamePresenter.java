@@ -12,11 +12,6 @@ import com.example.jumping_i.sudoku_original.base.BasePresenter;
 import com.example.jumping_i.sudoku_original.base.Config;
 import com.example.jumping_i.sudoku_original.data.ButtonData;
 import com.example.jumping_i.sudoku_original.data.SudokuData;
-import com.example.jumping_i.sudoku_original.retrofit.IResultListener;
-import com.example.jumping_i.sudoku_original.retrofit.RequestApiType;
-import com.example.jumping_i.sudoku_original.retrofit.RetrofitManager;
-import com.example.jumping_i.sudoku_original.retrofit.data.ResponseDataObj;
-import com.example.jumping_i.sudoku_original.retrofit.serverInterface.IParams;
 import com.example.jumping_i.sudoku_original.utils.SharedPrefManager;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameController;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameUtils;
@@ -27,8 +22,6 @@ import com.example.jumping_i.sudoku_original.views.history.InvokeManager;
 import com.example.jumping_i.sudoku_original.views.history.RequestDeleteSet;
 import com.example.jumping_i.sudoku_original.views.history.RequestNumberSet;
 import com.example.jumping_i.sudoku_original.views.history.ResultSet;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
