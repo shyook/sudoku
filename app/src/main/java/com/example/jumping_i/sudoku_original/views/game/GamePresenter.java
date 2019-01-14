@@ -57,7 +57,7 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
     @Override
     public void onSuccess(Object result) {
         ResultSet set = (ResultSet) result;
-        // 수도쿠 영역
+        // 스도쿠 영역
         mView.changeSudokuDataSet(set.getArraySudokuData());
 
         // 버튼 영역
@@ -81,7 +81,7 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
     }
 
     /**
-     * 수도쿠를 생성하고 그린다.
+     * 스도쿠를 생성하고 그린다.
      */
     public void createSudoku() {
         Log.d(TAG, "createSudoku()");
@@ -89,7 +89,7 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
     }
 
     /**
-     * 수도쿠 리스트 데이터를 반환한다.
+     * 스도쿠 리스트 데이터를 반환한다.
      * @return
      */
     public ArrayList<SudokuData> getArraySudoku() {
@@ -232,7 +232,7 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
     }
 
     /**
-     * 확인 버튼을 누른경우 수도쿠가 정확하게 완성 되었는지 확인 후 디스플레이 한다.
+     * 확인 버튼을 누른경우 스도쿠가 정확하게 완성 되었는지 확인 후 디스플레이 한다.
      */
     public void checkCompleteGame() {
         if (SudokuGameController.getInstance().isCompleteSudoku(SudokuGameUtils.getInstance().getSudokuListToArray(getArraySudoku()))) {
@@ -243,7 +243,7 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
     }
 
     /**
-     * 수도쿠를 초기화 한다.
+     * 스도쿠를 초기화 한다.
      */
     public void clearSudoku() {
         SudokuGameController.getInstance().clearGridView();

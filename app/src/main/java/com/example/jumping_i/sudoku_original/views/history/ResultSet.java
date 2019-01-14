@@ -8,7 +8,7 @@ public class ResultSet extends AbstractResponseSet {
     /*******************************************************************************
      * Variable.
      *******************************************************************************/
-    ArrayList<SudokuData> mArraySudokuData = null;  // 수도쿠 배열
+    ArrayList<SudokuData> mArraySudokuData = null;  // 스도쿠 배열
 
     /*******************************************************************************
      * 생성자.
