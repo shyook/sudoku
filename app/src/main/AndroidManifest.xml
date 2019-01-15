@@ -24,6 +24,11 @@
             android:name=".views.game.GameActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".views.game2.GameActivity2"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

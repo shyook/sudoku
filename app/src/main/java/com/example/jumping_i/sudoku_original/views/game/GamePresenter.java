@@ -53,7 +53,6 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
         }
     }
 
-
     @Override
     public void onSuccess(Object result) {
         ResultSet set = (ResultSet) result;
