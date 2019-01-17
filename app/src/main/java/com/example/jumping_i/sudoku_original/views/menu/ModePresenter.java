@@ -104,6 +104,15 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
     }
 
     /**
+     * 현재 게임 모드를 반환 한다.(Unit Test를 위해 추가.)
+     *
+     * @return
+     */
+    public SudokuGenerator.eGameMode getGameMode() {
+        return mGameMode;
+    }
+
+    /**
      * retrofit 라이브러리를 통해 Weather 데이터를 읽어 오고<br>
      * OrmLite 라이브러를 통해 db에 저장 하는 테스트를 위한 Method.
      */

@@ -265,6 +265,15 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
     }
 
     /**
+     * TODO Unit Test를 위해 추가한 코드로 사용하면 안됨.
+     * 
+     * @param context
+     */
+    public void setContext(Activity context) {
+        mActivity = context;
+    }
+
+    /**
      * 현재 게임 상태를 SharedPreference에 저장 한다.
      *
      * 현재 해당 영역을 사용하지는 않고 SharedPreference 테스트용으로 사용중.
