@@ -42,6 +42,10 @@
 
 ![presenter](https://user-images.githubusercontent.com/33274284/51365391-68f1e780-1b23-11e9-9dbd-1840d721f5ae.png)
 
+- Class Diagram
+
+![diagram](https://user-images.githubusercontent.com/33274284/51367795-8fb61b00-1b2f-11e9-86b1-2e361e450244.png)
+
 
 ## Screen Shot
 
