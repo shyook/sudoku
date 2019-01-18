@@ -31,6 +31,14 @@
 - Presenter Unit Test
 
 
+## Diagram
+
+- Activity 상속 Diagram
+![activity](https://user-images.githubusercontent.com/33274284/51365390-68595100-1b23-11e9-85d5-57cbe9fcb49b.png)
+- Presenter 상속 Diagram
+![presenter](https://user-images.githubusercontent.com/33274284/51365391-68f1e780-1b23-11e9-9dbd-1840d721f5ae.png)
+
+
 ## Screen Shot
 
 
