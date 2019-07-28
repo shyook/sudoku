@@ -38,4 +38,6 @@ dependencies {
     // retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    implementation 'com.google.android.gms:play-services-ads:17.1.1'
 }
