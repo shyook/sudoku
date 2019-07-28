@@ -14,6 +14,11 @@ import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.base.BaseActivity;
 import com.example.jumping_i.sudoku_original.consts.IConsts;
 import com.example.jumping_i.sudoku_original.data.SudokuData;
+import com.example.jumping_i.sudoku_original.views.ad.full.InterstitialAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 
@@ -26,6 +31,7 @@ public class GameActivity extends BaseActivity implements IGameContractView {
     private GridView mGridView;
     private GameGridViewAdapter mAdapter;           // Game Adapter
     private ButtonGridViewAdapter mButtonAdapter;   // 버튼 Adapter
+    private AdView mAdView; // 구글 광고
 
     /*******************************************************************************
      * Life Cycle.
@@ -63,6 +69,14 @@ public class GameActivity extends BaseActivity implements IGameContractView {
             setTitle(getString(R.string.title_game_mode, getString(mode)));
         }
 
+        // 광고
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        // 전면 광고 초기화.
+        InterstitialAds.getInstance(this);
+
         mPresenter.clearSudoku();
         mPresenter.createSudoku();
 
@@ -88,6 +102,15 @@ public class GameActivity extends BaseActivity implements IGameContractView {
                 } else {
                     Toast.makeText(getActivity(), R.string.sudoku_game_file_because_empty_cell, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        // 일시 정지
+        Button pauseButton = findViewById(R.id.game_pause_bt);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.pauseGame();
             }
         });
 

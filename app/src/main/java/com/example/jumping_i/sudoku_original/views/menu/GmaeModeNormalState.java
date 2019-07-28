@@ -8,11 +8,11 @@ import com.example.jumping_i.sudoku_original.utils.SudokuGenerator;
 public class GmaeModeNormalState implements IGameModeState {
     @Override
     public SudokuGenerator.eGameMode getNextUpState() {
-        return SudokuGenerator.eGameMode.SUDOKU_LEVEL_HARD;
+        return SudokuGenerator.eGameMode.SUDOKU_LEVEL_1;
     }
 
     @Override
     public SudokuGenerator.eGameMode getNextDownState() {
-        return SudokuGenerator.eGameMode.SUDOKU_LEVEL_EASY;
+        return SudokuGenerator.eGameMode.SUDOKU_LEVEL_2;
     }
 }

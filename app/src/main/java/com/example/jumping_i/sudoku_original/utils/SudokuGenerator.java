@@ -21,10 +21,29 @@ public class SudokuGenerator {
     public static final int SUDOKU_COL = 9;
     public static final int SUDOKU_REGION_NUMBER = 3;
     public static final int SUDOKU_TOTAL_NUMBER = SUDOKU_COL * SUDOKU_ROW;
+    // TODO 게임의 등급을 다 분화 한다.
+    // 표시되는 이름, 빈칸 수
+    // 1. 몸풀기 연습 부터 시작 - 20
+    // 2. 아직은 연습중 - 25
+    // 3. 슬슬 본 게임으로 가 볼까요 - 30
+    // 4. 이제는 좀 게임 같네 - 35
+    // 5. 난이도 올리기 준비 중 - 40
+    // 6. 이정도는 해야 보통이죠 - 45
+    // 7. 난이도를 좀 올려 볼까 - 50
+    // 8. 빈칸이 더 많아요 - 55
+    // 9. 훵 하네요 - 60
+    // 10. 이건 어렵다 - 70
     public enum eGameMode {
-        SUDOKU_LEVEL_EASY (R.string.sudoku_game_mode_easy, 30)
-        , SUDOKU_LEVEL_NOMAL(R.string.sudoku_game_mode_normal, 45)
-        , SUDOKU_LEVEL_HARD(R.string.sudoku_game_mode_hard, 60);
+        SUDOKU_LEVEL_1 (R.string.sudoku_game_mode_1, 20)
+        , SUDOKU_LEVEL_2(R.string.sudoku_game_mode_2, 25)
+        , SUDOKU_LEVEL_3(R.string.sudoku_game_mode_3, 30)
+        , SUDOKU_LEVEL_4(R.string.sudoku_game_mode_4, 35)
+        , SUDOKU_LEVEL_5(R.string.sudoku_game_mode_5, 40)
+        , SUDOKU_LEVEL_6(R.string.sudoku_game_mode_6, 45)
+        , SUDOKU_LEVEL_7(R.string.sudoku_game_mode_7, 50)
+        , SUDOKU_LEVEL_8(R.string.sudoku_game_mode_8, 55)
+        , SUDOKU_LEVEL_9(R.string.sudoku_game_mode_9, 60)
+        , SUDOKU_LEVEL_10(R.string.sudoku_game_mode_10, 70);
 
         private int mMode;
         private int mBlankNumber;
@@ -44,17 +63,38 @@ public class SudokuGenerator {
 
         public static eGameMode getIntToGameMode(int mode) {
             switch (mode) {
-                case R.string.sudoku_game_mode_easy:
-                    return SUDOKU_LEVEL_EASY;
+                case R.string.sudoku_game_mode_1:
+                    return SUDOKU_LEVEL_1;
 
-                case R.string.sudoku_game_mode_normal:
-                    return SUDOKU_LEVEL_NOMAL;
+                case R.string.sudoku_game_mode_2:
+                    return SUDOKU_LEVEL_2;
 
-                case R.string.sudoku_game_mode_hard:
-                    return SUDOKU_LEVEL_HARD;
+                case R.string.sudoku_game_mode_3:
+                    return SUDOKU_LEVEL_3;
+
+                case R.string.sudoku_game_mode_4:
+                    return SUDOKU_LEVEL_4;
+
+                case R.string.sudoku_game_mode_5:
+                    return SUDOKU_LEVEL_5;
+
+                case R.string.sudoku_game_mode_6:
+                    return SUDOKU_LEVEL_6;
+
+                case R.string.sudoku_game_mode_7:
+                    return SUDOKU_LEVEL_7;
+
+                case R.string.sudoku_game_mode_8:
+                    return SUDOKU_LEVEL_8;
+
+                case R.string.sudoku_game_mode_9:
+                    return SUDOKU_LEVEL_9;
+
+                case R.string.sudoku_game_mode_10:
+                    return SUDOKU_LEVEL_10;
 
                 default:
-                    return SUDOKU_LEVEL_EASY;
+                    return SUDOKU_LEVEL_5;
             }
         }
     }

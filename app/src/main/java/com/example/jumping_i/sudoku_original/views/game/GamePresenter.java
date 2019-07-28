@@ -16,6 +16,7 @@ import com.example.jumping_i.sudoku_original.utils.SharedPrefManager;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameController;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameUtils;
 import com.example.jumping_i.sudoku_original.utils.SudokuGenerator;
+import com.example.jumping_i.sudoku_original.views.ad.full.InterstitialAds;
 import com.example.jumping_i.sudoku_original.views.history.BaseRequestSet;
 import com.example.jumping_i.sudoku_original.views.history.ISuccessResponse;
 import com.example.jumping_i.sudoku_original.views.history.InvokeManager;
@@ -33,7 +34,7 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
      *******************************************************************************/
     private IGameContractView mView = null;
     private Activity mActivity = null;
-    private SudokuGenerator.eGameMode mGameMode = SudokuGenerator.eGameMode.SUDOKU_LEVEL_EASY;
+    private SudokuGenerator.eGameMode mGameMode = SudokuGenerator.eGameMode.SUDOKU_LEVEL_5;
     private int mSelectedPosition = -1;
     private TextView mSelectedCell = null;
 
@@ -305,5 +306,13 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
             SharedPrefManager.getInstance(mActivity).setJsonArrayList(SharedPrefManager.PREF_KEYS.TEST_SHARED_KEY_BOOLEAN, boolList);
             Log.i(TAG, "Boolean Json Array" + SharedPrefManager.getInstance(mActivity).getJsonArrayList(SharedPrefManager.PREF_KEYS.TEST_SHARED_KEY_BOOLEAN, new ArrayList<Boolean>()));
         }
+    }
+
+    /**
+     * 게임 일시 정지 후 전면 광고 노출.
+     */
+    public void pauseGame() {
+        InterstitialAds.getInstance(mActivity).show();
+
     }
 }

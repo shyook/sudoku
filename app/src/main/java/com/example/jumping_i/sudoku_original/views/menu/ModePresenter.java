@@ -26,7 +26,7 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
      *******************************************************************************/
     private IModeContractView mView = null;
     private Activity mActivity = null;
-    private SudokuGenerator.eGameMode mGameMode = SudokuGenerator.eGameMode.SUDOKU_LEVEL_EASY;
+    private SudokuGenerator.eGameMode mGameMode = SudokuGenerator.eGameMode.SUDOKU_LEVEL_5;
     /** BackKey press Count. */
     private int mBackButtonClickCount = 0;
 
@@ -56,9 +56,9 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
     public void changeMode(boolean isUp) {
         Log.d(TAG, "changeMode()");
         if (isUp) {
-            mGameMode = getCurrentModeState(mGameMode).getNextUpState();
+            mGameMode = GameModeState.getInstance().getNextUpState();
         } else {
-            mGameMode = getCurrentModeState(mGameMode).getNextDownState();
+            mGameMode = GameModeState.getInstance().getNextDownState();
         }
 
         updateGameMode(mGameMode);
@@ -70,6 +70,7 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
     public void initGameMode() {
         Log.d(TAG, "initGameMode()");
         mView.updateGameModeView(mGameMode.getMode());
+        GameModeState.getInstance().initGameMode(mGameMode);    // 게임 모드 초기화.
     }
 
     /**
@@ -183,13 +184,13 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
      */
     private IGameModeState getCurrentModeState(SudokuGenerator.eGameMode gameMode) {
         switch (gameMode.getMode()) {
-            case R.string.sudoku_game_mode_easy:
+            case R.string.sudoku_game_mode_1:
                 return new GameModeEasyState();
 
-            case R.string.sudoku_game_mode_normal:
+            case R.string.sudoku_game_mode_2:
                 return new GmaeModeNormalState();
 
-            case R.string.sudoku_game_mode_hard:
+            case R.string.sudoku_game_mode_3:
                 return new GameModeHardState();
 
             default:

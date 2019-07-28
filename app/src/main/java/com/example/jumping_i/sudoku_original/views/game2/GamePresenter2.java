@@ -33,7 +33,7 @@ public class GamePresenter2 extends BasePresenter<IGameContractView2> implements
     private IButtonAdapterContract.Model mButtonAdapterModel;
     private IButtonAdapterContract.View mButtonAdapterView;
     private Activity mActivity = null;
-    private SudokuGenerator.eGameMode mGameMode = SudokuGenerator.eGameMode.SUDOKU_LEVEL_EASY;
+    private SudokuGenerator.eGameMode mGameMode = SudokuGenerator.eGameMode.SUDOKU_LEVEL_5;
     private int mSelectedPosition = -1;
     private TextView mSelectedCell = null;
     private ArrayList<String> mButtonInfo = new ArrayList<>();

@@ -1,19 +1,36 @@
 <resources>
-    <string name="app_name">sudoku_original</string>
+    <string name="app_name">sudoku game</string>
+    <!-- 광고 -->
+    <string name="admob_app_id">ca-app-pub-1418621327926456~8729877460</string>
+    <string name="banner_ad_unit_id">ca-app-pub-1418621327926456/4652753853</string>
+    <string name="full_ad_unit_id">ca-app-pub-1418621327926456/4591068316</string>
+    <string name="banner_ad_unit_id_for_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="sample_id">ca-app-pub-3940256099942544/1033173712</string>
+
     <string name="button_del">DEL</string>
     <string name="sudoku_game_complete">게임 성공!!</string>
     <string name="sudoku_game_file_because_empty_cell">아직 채우지 않은 공간이 있습니다.</string>
     <string name="sudoku_game_fail">잘못 입력된 값이 존재합니다.</string>
     <string name="sudoku_game_start">게임 시작</string>
 
-    <string name="sudoku_game_mode_easy">쉬움</string>
-    <string name="sudoku_game_mode_normal">보통</string>
-    <string name="sudoku_game_mode_hard">어려움</string>
+    <string name="sudoku_game_mode_select_description">게임 난이도를 선택 후\n시작 버튼을 눌러 게임을 시작 하세요!!!</string>
+
+    <string name="sudoku_game_mode_1">몸풀기 연습 부터 시작</string>
+    <string name="sudoku_game_mode_2">아직은 연습중</string>
+    <string name="sudoku_game_mode_3">슬슬 본 게임으로 가 볼까요</string>
+    <string name="sudoku_game_mode_4">이제는 좀 게임 같네</string>
+    <string name="sudoku_game_mode_5">난이도 올리기 준비 중</string>
+    <string name="sudoku_game_mode_6">이정도는 해야 게임 이죠</string>
+    <string name="sudoku_game_mode_7">난이도를 좀 올려 볼까</string>
+    <string name="sudoku_game_mode_8">빈칸이 더 많아요</string>
+    <string name="sudoku_game_mode_9">훵 하네</string>
+    <string name="sudoku_game_mode_10">이건 어렵다</string>
 
     <string name="title_game_mode_select">게임 난이도 선택</string>
     <string name="title_game_mode">난이도 : %s</string>
 
-    <string name="button_confirm">확인</string>
+    <string name="button_confirm">정답 확인</string>
+    <string name="button_pause">일시 정지</string>
 
     <string name="toast_finish_app">\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.</string>
     <string name="button_redo">Redo</string>
@@ -21,4 +38,8 @@
 
     <string name="sudoku_state_start_game">start</string>
     <string name="sudoku_state_stop_game">stop</string>
+
+    <string name="sudoku_game_finish_info">앱을 종료 하시겠습니까?</string>
+    <string name="finish">종료</string>
+    <string name="cancel">취소</string>
 </resources>

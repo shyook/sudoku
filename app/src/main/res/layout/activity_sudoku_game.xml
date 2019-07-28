@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id_for_test" />
 
     <GridView
         android:id="@+id/game_cell_gv"
@@ -15,28 +25,42 @@
         android:columnWidth="1dp"
         android:background="#ececec"
         android:numColumns="9"
-        android:gravity="center" >
+        android:gravity="center"
+        android:visibility="visible" >
     </GridView>
 
     <GridView
         android:id="@+id/game_button_cell_gv"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@id/game_cell_gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="4" >
+        android:numColumns="4"
+        android:visibility="visible" >
     </GridView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:weightSum="2"  >
 
         <Button
             android:id="@+id/game_confirm_bt"
-            android:layout_width="match_parent"
-            android:text="@string/button_confirm"
-            android:layout_height="50dp" />
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/button_confirm" />
+
+        <Button
+            android:id="@+id/game_pause_bt"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/button_pause" />
     </LinearLayout>
 
 </LinearLayout>
