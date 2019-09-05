@@ -8,4 +8,59 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TransDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!-- Dialog -->
+    <style name="AppBaseDialogTheme" parent="Theme.AppCompat.Dialog" />
+
+    <style name="AppDialog" parent="AppBaseDialogTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="dialog_title" parent="singleLine_ellipsize">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <style name="singleLine_ellipsize">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingTop">3dp</item>
+    </style>
+
+    <style name="dialog_msg">
+        <item name="android:textSize">14dp</item>
+        <item name="android:lineSpacingExtra">9dp</item>
+        <item name="android:textColor">#666666</item>
+    </style>
+
+    <style name="dialog_sub_msg">
+        <item name="android:textSize">11dp</item>
+        <item name="android:lineSpacingExtra">6dp</item>
+        <item name="android:textColor">#666666</item>
+    </style>
+
+    <style name="popbtn_a">
+        <item name="android:minWidth">50dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:paddingLeft">21dp</item>
+        <item name="android:paddingRight">21dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@drawable/selector_drawable_transparent_black10</item>
+    </style>
+
 </resources>

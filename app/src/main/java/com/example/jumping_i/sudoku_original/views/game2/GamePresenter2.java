@@ -155,21 +155,21 @@ public class GamePresenter2 extends BasePresenter<IGameContractView2> implements
         Log.d(TAG, "getArraySudoku()");
         return SudokuGameController.getInstance().getArraySudoku();
     }
-
-    /**
-     * 스도쿠를 생성하고 그린다.
-     */
-    public void createSudoku() {
-        Log.d(TAG, "createSudoku()");
-        SudokuGameController.getInstance().createGameGrid(mActivity, mGameMode);
-    }
-
-    /**
-     * 스도쿠를 초기화 한다.
-     */
-    public void clearSudoku() {
-        SudokuGameController.getInstance().clearGridView();
-    }
+//
+//    /**
+//     * 스도쿠를 생성하고 그린다.
+//     */
+//    public void createSudoku() {
+//        Log.d(TAG, "createSudoku()");
+//        SudokuGameController.getInstance().createGameGrid(mGameMode);
+//    }
+//
+//    /**
+//     * 스도쿠를 초기화 한다.
+//     */
+//    public void clearSudoku() {
+//        SudokuGameController.getInstance().clearGridView();
+//    }
 
     /**
      * 게임 시작을 위해 Adapter에 데이터를 셋팅 한다.

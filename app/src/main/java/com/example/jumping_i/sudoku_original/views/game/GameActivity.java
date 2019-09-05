@@ -14,7 +14,9 @@ import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.base.BaseActivity;
 import com.example.jumping_i.sudoku_original.consts.IConsts;
 import com.example.jumping_i.sudoku_original.data.SudokuData;
+import com.example.jumping_i.sudoku_original.utils.DialogUtils;
 import com.example.jumping_i.sudoku_original.views.ad.full.InterstitialAds;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -69,16 +71,16 @@ public class GameActivity extends BaseActivity implements IGameContractView {
             setTitle(getString(R.string.title_game_mode, getString(mode)));
         }
 
+        // 전면 광고 초기화.
+        InterstitialAds.getInstance(this);
+
         // 광고
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        // 전면 광고 초기화.
-        InterstitialAds.getInstance(this);
-
-        mPresenter.clearSudoku();
-        mPresenter.createSudoku();
+//        mPresenter.clearSudoku();
+//        mPresenter.createSudoku();
 
         // Game Cell Area
         mGridView = findViewById(R.id.game_cell_gv);
@@ -113,8 +115,8 @@ public class GameActivity extends BaseActivity implements IGameContractView {
                 mPresenter.pauseGame();
             }
         });
-
         mPresenter.setGameState();
+        closeProgress();
     }
 
     /**
@@ -139,9 +141,13 @@ public class GameActivity extends BaseActivity implements IGameContractView {
     @Override
     public void doResultDisplay(boolean result) {
         if (result) {
-            Toast.makeText(this, R.string.sudoku_game_complete, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, R.string.sudoku_game_complete, Toast.LENGTH_SHORT).show();
+            DialogUtils.alert(this, getString(R.string.popup_title_complete)
+                    , getString(R.string.popup_message_complete), null);
         } else {
-            Toast.makeText(this, R.string.sudoku_game_fail, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, R.string.sudoku_game_fail, Toast.LENGTH_SHORT).show();
+            DialogUtils.alert(this, getString(R.string.popup_default_title)
+                    , getString(R.string.popup_message_game_fail), null);
         }
     }
 

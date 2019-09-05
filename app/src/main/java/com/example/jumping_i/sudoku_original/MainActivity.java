@@ -50,6 +50,12 @@ public class MainActivity extends BaseActivity implements IModeContractView {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        closeProgress();
+    }
+
+    @Override
     public void onBackPressed() {
 //        if (mPresenter.checkExitApp()) {
 //            super.onBackPressed();
@@ -110,6 +116,7 @@ public class MainActivity extends BaseActivity implements IModeContractView {
                     break;
 
                 case R.id.game_start_bt:
+                    showProgress(false, null);
                     mPresenter.startGame();
                     break;
 

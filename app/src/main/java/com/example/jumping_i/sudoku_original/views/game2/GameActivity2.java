@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.jumping_i.sudoku_original.R;
 import com.example.jumping_i.sudoku_original.base.BaseActivity;
 import com.example.jumping_i.sudoku_original.consts.IConsts;
+import com.example.jumping_i.sudoku_original.utils.DialogUtils;
 
 public class GameActivity2 extends BaseActivity implements IGameContractView2 {
     private static final String TAG = GameActivity2.class.getSimpleName();
@@ -58,7 +59,7 @@ public class GameActivity2 extends BaseActivity implements IGameContractView2 {
         }
 
         mPresenter.clearSudoku();
-        mPresenter.createSudoku();
+        // mPresenter.createSudoku(mGameMode);
 
         // Game Cell Area
         mGridView = findViewById(R.id.game_cell_gv);
@@ -93,9 +94,13 @@ public class GameActivity2 extends BaseActivity implements IGameContractView2 {
     @Override
     public void doResultDisplay(boolean result) {
         if (result) {
-            Toast.makeText(this, R.string.sudoku_game_complete, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, R.string.sudoku_game_complete, Toast.LENGTH_SHORT).show();
+            DialogUtils.alert(this, getString(R.string.popup_title_complete)
+                    , getString(R.string.popup_message_complete), null);
         } else {
-            Toast.makeText(this, R.string.sudoku_game_fail, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, R.string.sudoku_game_fail, Toast.LENGTH_SHORT).show();
+            DialogUtils.alert(this, getString(R.string.popup_default_title)
+                    , getString(R.string.popup_message_game_fail), null);
         }
     }
 }

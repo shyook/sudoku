@@ -34,9 +34,9 @@
             <ImageButton
                 android:id="@+id/arrow_up_iv"
                 android:layout_gravity="center"
-                android:background="@drawable/btn_list_up"
+                android:background="@drawable/co_btn_arrow_up_9"
                 android:layout_marginBottom="30dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
@@ -52,8 +52,8 @@
             <ImageButton
                 android:id="@+id/arrow_down_iv"
                 android:layout_gravity="center"
-                android:background="@drawable/btn_list_down"
-                android:layout_width="wrap_content"
+                android:background="@drawable/co_btn_arrow_down_9"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 

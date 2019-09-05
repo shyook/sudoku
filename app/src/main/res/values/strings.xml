@@ -10,7 +10,6 @@
     <string name="button_del">DEL</string>
     <string name="sudoku_game_complete">게임 성공!!</string>
     <string name="sudoku_game_file_because_empty_cell">아직 채우지 않은 공간이 있습니다.</string>
-    <string name="sudoku_game_fail">잘못 입력된 값이 존재합니다.</string>
     <string name="sudoku_game_start">게임 시작</string>
 
     <string name="sudoku_game_mode_select_description">게임 난이도를 선택 후\n시작 버튼을 눌러 게임을 시작 하세요!!!</string>
@@ -42,4 +41,14 @@
     <string name="sudoku_game_finish_info">앱을 종료 하시겠습니까?</string>
     <string name="finish">종료</string>
     <string name="cancel">취소</string>
+    <string name="confirm">확인</string>
+    <string name="yes">예</string>
+    <string name="no">아니오</string>
+
+    <!-- Popup -->
+    <string name="popup_default_title">안내</string>
+    <string name="popup_title_complete">성공</string>
+    <string name="popup_message_complete">짝짝짝짝~~~~\nn축하 합니다!!\n정답 입니다.</string>
+    <string name="popup_message_game_fail">잘못 입력된 값이 존재합니다.</string>
+
 </resources>

@@ -14,6 +14,7 @@ import com.example.jumping_i.sudoku_original.db.data.Weather;
 import com.example.jumping_i.sudoku_original.retrofit.IResultListener;
 import com.example.jumping_i.sudoku_original.retrofit.data.ResponseDataObj;
 import com.example.jumping_i.sudoku_original.retrofit.serverInterface.ServerInterface;
+import com.example.jumping_i.sudoku_original.utils.DialogUtils;
 import com.example.jumping_i.sudoku_original.utils.SudokuGenerator;
 import com.example.jumping_i.sudoku_original.views.game.GameActivity;
 
@@ -78,6 +79,11 @@ public class ModePresenter extends BasePresenter<IModeContractView> {
      */
     public void startGame() {
         Log.d(TAG, "initGameMode()");
+        long startTime = System.currentTimeMillis();
+        clearSudoku();
+        createSudoku(mGameMode);
+        long endTime = System.currentTimeMillis();
+        Log.i(TAG, "create sudoku : " + (endTime - startTime) / 1000.0);
         Intent i = new Intent(mActivity, GameActivity.class);
         i.putExtra(IConsts.IntentConsts.BUNDLE_GAME_MODE, mGameMode.getMode());
         mActivity.startActivity(i);

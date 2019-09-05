@@ -12,6 +12,7 @@ import com.example.jumping_i.sudoku_original.base.BasePresenter;
 import com.example.jumping_i.sudoku_original.base.Config;
 import com.example.jumping_i.sudoku_original.data.ButtonData;
 import com.example.jumping_i.sudoku_original.data.SudokuData;
+import com.example.jumping_i.sudoku_original.utils.DialogUtils;
 import com.example.jumping_i.sudoku_original.utils.SharedPrefManager;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameController;
 import com.example.jumping_i.sudoku_original.utils.SudokuGameUtils;
@@ -78,14 +79,6 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
         Log.d(TAG, "setGameMode()");
         mGameMode = SudokuGenerator.eGameMode.getIntToGameMode(mode);
         Log.i(TAG, "mGameMode : " + mActivity.getString(mGameMode.getMode()));
-    }
-
-    /**
-     * 스도쿠를 생성하고 그린다.
-     */
-    public void createSudoku() {
-        Log.d(TAG, "createSudoku()");
-        SudokuGameController.getInstance().createGameGrid(mActivity, mGameMode);
     }
 
     /**
@@ -240,13 +233,6 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
         }
 
         mView.doResultDisplay(false);
-    }
-
-    /**
-     * 스도쿠를 초기화 한다.
-     */
-    public void clearSudoku() {
-        SudokuGameController.getInstance().clearGridView();
     }
 
     /**
