@@ -230,6 +230,7 @@ public class GamePresenter extends BasePresenter<IGameContractView> implements I
     public void checkCompleteGame() {
         if (SudokuGameController.getInstance().isCompleteSudoku(SudokuGameUtils.getInstance().getSudokuListToArray(getArraySudoku()))) {
             mView.doResultDisplay(true);
+            return;
         }
 
         mView.doResultDisplay(false);

@@ -107,12 +107,26 @@ public class CustomDialog extends Dialog {
         }
     }
 
-    @Override
+    /**
+     * 타이틀 입력.
+     * @param titleId
+     */
     public void setTitle(int titleId) {
         if (mTitleTV == null) {
             return;
         }
         mTitleTV.setText(titleId);
+    }
+
+    /**
+     * 타이틀 입력.
+     * @param title
+     */
+    public void setTitle(CharSequence title) {
+        if (mTitleTV == null) {
+            return;
+        }
+        mTitleTV.setText(title);
     }
 
     /**

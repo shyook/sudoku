@@ -1,5 +1,6 @@
 package com.example.jumping_i.sudoku_original.views.game;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -143,11 +144,25 @@ public class GameActivity extends BaseActivity implements IGameContractView {
         if (result) {
             // Toast.makeText(this, R.string.sudoku_game_complete, Toast.LENGTH_SHORT).show();
             DialogUtils.alert(this, getString(R.string.popup_title_complete)
-                    , getString(R.string.popup_message_complete), null);
+                    , getString(R.string.popup_message_complete), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // 정답을 맞추고 확인 버턴을 누른 경우 히스토리 저장 후 이전 화면으로 이동.
+                            DialogUtils.dismissDialog();
+                            if (which == DialogInterface.BUTTON_POSITIVE) {
+                                finish();
+                            }
+                        }
+                    });
         } else {
             // Toast.makeText(this, R.string.sudoku_game_fail, Toast.LENGTH_SHORT).show();
             DialogUtils.alert(this, getString(R.string.popup_default_title)
-                    , getString(R.string.popup_message_game_fail), null);
+                    , getString(R.string.popup_message_game_fail), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            DialogUtils.dismissDialog();
+                        }
+                    });
         }
     }
 
